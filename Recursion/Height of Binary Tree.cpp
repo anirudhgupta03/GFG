@@ -4,7 +4,7 @@ class Solution{
         
         
         if(node == NULL){
-            return 0;
+            return -1;
         }
         
         int lh = height(node -> left);
