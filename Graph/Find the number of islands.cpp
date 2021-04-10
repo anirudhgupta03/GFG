@@ -39,7 +39,7 @@ public:
                 
                 if(vis[i][j] == 0){
                     
-                    if(isValid(i,j,n,m,vis,grid)){
+                    if(grid[i][j] == '1'){
                         dfs(i,j,n,m,vis,grid);
                         cc_count++;
                     }
