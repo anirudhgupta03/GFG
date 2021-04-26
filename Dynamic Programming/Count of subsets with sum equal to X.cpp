@@ -15,7 +15,7 @@ int Solution::solve(vector<int> &A, int B) {
         for(int j = 1; j <= B; j++){
             
             if(A[i-1] <= j){
-                dp[i][j] = dp[i-1][j-A[i-1]] || dp[i-1][j];
+                dp[i][j] = dp[i-1][j-A[i-1]] + dp[i-1][j];
             }
             else{
                 dp[i][j] = dp[i-1][j];
