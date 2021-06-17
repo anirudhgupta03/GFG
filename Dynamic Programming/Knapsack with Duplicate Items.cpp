@@ -1,3 +1,56 @@
+//Recursive Approach
+//Time Complexity - O(2^N)
+//Space Complexity - O(1)
+class Solution{
+public:
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        if(W == 0 || N == 0){
+            return 0;
+        }
+        
+        if(wt[N-1] <= W){
+            return max(val[N-1] + knapSack(N,W-wt[N-1],val,wt), knapSack(N-1,W,val,wt));
+        }
+        else{
+            return knapSack(N-1,W,val,wt);
+        }
+    }
+};
+
+//Top-Down Approach
+//Time Complexity - O(N*W)
+//Space Complexity - O(N*W)
+class Solution{
+public:
+    int solve(int N, int W, int val[], int wt[], vector<vector<int>> &dp){
+        
+        if(N == 0 || W == 0){
+            return dp[N][W] = 0;
+        }
+        
+        if(dp[N][W] != -1){
+            return dp[N][W];
+        }
+        
+        if(wt[N-1] <= W){
+            return dp[N][W] = max(val[N-1] + solve(N,W - wt[N-1],val,wt,dp), solve(N-1,W,val,wt,dp));
+        }
+        else{
+            return dp[N][W] = solve(N-1,W,val,wt,dp);
+        }
+    }
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        vector<vector<int>> dp(N+1,vector<int>(W+1,-1));
+        
+        return solve(N,W,val,wt,dp);
+    }
+};
+
+//Bottom-Up Approach
+//Time Complexity - O(N*W)
+//Space Complexity - O(N*W)
 class Solution{
 public:
     int knapSack(int N, int W, int val[], int wt[])
