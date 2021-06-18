@@ -33,7 +33,7 @@ class Solution{
 
 //Top-Down Approach
 //Time Complexity - O(M*V)
-//Space Complexity - O(1)
+//Space Complexity - O(M*V)
 class Solution{	
 	public:
 	int solve(int M, int V, int coins[], vector<vector<int>> &dp){
@@ -72,7 +72,7 @@ class Solution{
 
 //Bottom-Up Approach
 //Time Complexity - O(M*V)
-//Space Complexity - O(1)
+//Space Complexity - O(M*V)
 class Solution{
 	
 	public:
