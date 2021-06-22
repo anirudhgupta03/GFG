@@ -1,3 +1,30 @@
+//Recurisve Approach
+class Solution{
+public:
+    int solve(int arr[], int i, int j){
+        
+        if(i >= j){
+            return 0;
+        }
+        int mn = INT_MAX;
+        
+        for(int k = i; k <= j - 1; k++){
+            
+            int tempans = solve(arr,i,k) + solve(arr,k+1,j) + arr[i-1]*arr[k]*arr[j];
+            mn = min(mn,tempans);
+        }
+        return mn;
+    }
+    int matrixMultiplication(int N, int arr[])
+    {
+        int i = 1, j = N - 1;
+        return solve(arr,i,j);
+    }
+};
+
+//Top-Down Approach
+//Time Complexity - O(N^2)
+//Space Complexity - O(N^2)
 class Solution{
 public:
     
