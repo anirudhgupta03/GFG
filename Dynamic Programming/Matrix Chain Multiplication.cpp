@@ -23,7 +23,7 @@ public:
 };
 
 //Top-Down Approach
-//Time Complexity - O(N^2)
+//Time Complexity - O(N^3)
 //Space Complexity - O(N^2)
 class Solution{
 public:
