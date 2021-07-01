@@ -17,7 +17,7 @@ class Solution{
         
         for(int i = 0; i < n; i++){
             
-            while(arr[i] <= right[j] && j < n){
+            while(j < n && arr[i] <= right[j]){
                 j++;
             }
             ans = max(ans,j-i-1);
