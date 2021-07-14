@@ -1,3 +1,5 @@
+/*
+The structure of petrolPump is 
 struct petrolPump
 {
     int petrol;
