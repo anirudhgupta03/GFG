@@ -1,3 +1,4 @@
+class Solution{
 public:
     void merge(int arr[], int l, int m, int r)
     {
@@ -50,3 +51,4 @@ public:
         mergeSort(arr,mid+1,r);
         merge(arr,l,mid,r);
     }
+};
