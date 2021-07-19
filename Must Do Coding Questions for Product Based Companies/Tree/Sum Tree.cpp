@@ -1,21 +1,23 @@
 class Solution
 {
     public:
-    int check(Node* root,bool &flag){
+    int check(Node* root, bool &flag){
         
         if(root == NULL){
             return 0;
         }
         
-        int lsum = check(root->left,flag);
-        int rsum = check(root->right,flag);
-        
-        if(!(lsum == 0 && rsum == 0)){
-            if(lsum + rsum != root -> data){
-                flag = false;
-            }
+        if(root -> left == NULL &&  root -> right == NULL){
+            return root -> data;
         }
-        return lsum + rsum + root -> data;
+        int l = check(root->left,flag);
+        int r = check(root->right,flag);
+        
+        if(root -> data != l + r){
+            flag = false;
+        }
+        
+        return root -> data + l + r;
     }
     bool isSumTree(Node* root)
     {
