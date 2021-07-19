@@ -11,7 +11,9 @@ class Solution {
             return s;
         }
         s = s + to_string(root -> data);
+        s.push_back(' ');
         s = s + solve(root -> left, m);
+        s.push_back(' ');
         s = s + solve(root -> right, m);
         m[s]++;
         return s;
@@ -24,4 +26,3 @@ class Solution {
          }
          return 0;
     }
-};
