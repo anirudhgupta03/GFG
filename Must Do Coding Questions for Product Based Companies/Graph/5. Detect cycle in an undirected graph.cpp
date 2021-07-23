@@ -1,3 +1,4 @@
+//Using DFS
 class Solution 
 {
     public:
@@ -34,3 +35,43 @@ class Solution
 	    }
 	    return false;
 	}
+};
+
+//Using BFS
+class Solution 
+{
+    public:
+    //Function to detect cycle in an undirected graph.
+	bool isCycle(int V, vector<int>adj[])
+	{
+	    vector<int> vis(V,0);
+	    
+	    for(int i = 0; i < V; i++){
+	        
+	        if(!vis[i]){
+	            
+	            queue<pair<int,int>> q;
+	            q.push({i,-1});
+	            vis[i] = 1;
+	            
+	            while(!q.empty()){
+	                
+	                int node = q.front().first, par = q.front().second;
+	                q.pop();
+	                
+	                for(int j = 0; j < adj[node].size(); j++){
+	                    int child = adj[node][j];
+	                    if(vis[child] && child != par){
+	                        return true;
+	                    }
+	                    else if(!vis[child]){
+	                        vis[child] = 1;
+	                        q.push({child,node});
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    return false;
+	}
+};
