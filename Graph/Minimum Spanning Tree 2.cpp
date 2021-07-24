@@ -53,3 +53,54 @@ int selectMinVertex(vector<int> &wt, vector<int> &vis){
         return ans;
     }
 };
+
+//Kruskal
+class Solution
+{
+	public:
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+	bool static cmp(vector<int> v1, vector<int> v2){
+	    return v1[2] < v2[2];
+	}
+	int findP(int node, vector<int> &par){
+	    
+	    if(par[node] == -1){
+	        return node;
+	    }
+	    return par[node] = findP(par[node],par);
+	}
+	void unionP(int node1, int node2, vector<int> &par){
+	    par[node2] = node1;
+	}
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        vector<vector<int>> al;
+        
+        for(int i = 0; i < V; i++){
+            for(int j = 0; j < adj[i].size(); j++){
+                al.push_back({i,adj[i][j][0],adj[i][j][1]});
+            }
+        }
+        
+        int minWt = 0;
+        
+        vector<int> par(V,-1);
+        
+        sort(al.begin(),al.end(),cmp);
+        
+        for(int i = 0; i < al.size(); i++){
+            
+            int a = al[i][0], b = al[i][1], w = al[i][2];
+            
+            int para = findP(a,par);
+            int parb = findP(b,par);
+            
+            if(para != parb){
+                minWt += w;
+                unionP(para,parb,par);
+            }
+        }
+        
+        return minWt;
+    }
+};
