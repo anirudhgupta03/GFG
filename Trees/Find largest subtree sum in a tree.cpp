@@ -61,3 +61,44 @@ int main()
     cout << findLargestSubtreeSum(root);
     return 0;
 }
+
+//https://www.codingninjas.com/codestudio/problems/largest-sub-tree-sum_920400?leftPanelTab=1
+/************************************************************
+
+    Following is the TreeNode class structure:
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+************************************************************/
+#include<bits/stdc++.h>
+using namespace std;
+int solve(TreeNode<int> *root, int &maxSum){
+    if(root == NULL){
+        return 0;
+    }
+    
+    int l = solve(root -> left, maxSum);
+    int r = solve(root -> right, maxSum);
+    
+    root -> data += l + r;
+    maxSum = max(maxSum, root -> data);
+    
+    return root -> data;
+}
+int largestSubtreeSum(TreeNode<int> *root) {
+	
+    int maxSum = INT_MIN;
+    solve(root, maxSum);
+    return maxSum;
+}
