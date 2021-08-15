@@ -1,5 +1,8 @@
 // C++ program for Minimum swap required
 // to convert binary tree to binary search tree
+
+//Time Complexity - O(nlogn)
+//Space Complexity - O(n)
 #include<bits/stdc++.h>
 using namespace std;
  
@@ -58,3 +61,53 @@ int main()
     inorder(a, v, n, 0);
     cout << minSwaps(v) << endl;
 }
+
+//https://www.codingninjas.com/codestudio/problems/minimum-swaps-to-convert-binary-tree-into-bst_1118109?leftPanelTab=1
+#include<bits/stdc++.h>
+using namespace std;
+void inorder(int ind, int n, vector<int> &v, vector<int> &arr){
+    
+    if(ind >= n){
+        return;
+    }
+    
+    inorder(2*ind + 1, n, v, arr);
+    v.push_back(arr[ind]);
+    inorder(2*ind + 2, n, v, arr);
+}
+bool cmp(pair<int,int> p1, pair<int,int> p2){
+    return p1.first < p2.first;
+}
+int minimumSwaps(vector<int>&arr, int n) {
+			
+    vector<int> v;
+    inorder(0,n,v,arr);
+    
+    vector<pair<int,int>> temp;
+    for(int i = 0; i < v.size(); i++){
+        temp.push_back({v[i],i});
+    }
+    
+    sort(temp.begin(),temp.end(),cmp);
+    vector<int> vis(n,0);
+    	
+    int swaps = 0;
+    
+    for(int i = 0; i < n; i++){
+        if(vis[i] == 1 || i == temp[i].second){
+            continue;
+        }
+        
+        int cycle_size = 1;
+        vis[i] = 1;
+        
+        int ind = temp[i].second;
+        while(vis[ind] == 0){
+            cycle_size++;
+            vis[ind] = 1;
+            ind = temp[ind].second;
+        }
+        swaps += cycle_size - 1;
+    }
+    return swaps;
+}			
