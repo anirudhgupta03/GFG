@@ -26,3 +26,54 @@ class Solution {
          }
          return 0;
     }
+}
+
+//Alter
+struct Node
+{
+  char data;
+  struct Node* left;
+  struct Node* right;
+};*/
+
+class Solution {
+  public:
+    /*This function returns true if the tree contains 
+    a duplicate subtree of size 2 or more else returns false*/
+    string check(Node* root, unordered_map<string,int> &umap, bool &flag){
+        
+        if(root == NULL){
+            return "";
+        }
+        
+        if(root -> left == NULL && root -> right == NULL){
+            return to_string(root -> data);
+        }
+        
+        string l = check(root -> left, umap, flag);
+        string r = check(root -> right, umap, flag);
+        
+        string temp = l + " " + to_string(root -> data) + " " + r;
+        
+        if(umap.find(temp) != umap.end()){
+            flag = true;
+        }
+        else{
+            umap[temp]++;
+        }
+        
+        return temp;
+    }
+    int dupSub(Node *root) {
+        
+        if(root == NULL){
+            return 0;
+        }
+        
+        unordered_map<string,int> umap;
+        bool flag = false;
+        check(root, umap, flag);
+        
+        return flag;
+    }
+};
