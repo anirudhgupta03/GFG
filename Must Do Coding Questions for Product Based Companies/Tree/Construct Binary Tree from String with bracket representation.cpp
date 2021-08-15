@@ -86,3 +86,76 @@ int main()
     preorder(root);
     return 0;
 }
+
+//https://www.codingninjas.com/codestudio/problems/binary-tree-from-bracket_1118117?leftPanelTab=1
+/*************************************************************
+ 
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode 
+    {
+    public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+#include<bits/stdc++.h>
+using namespace std;
+*************************************************************/
+BinaryTreeNode<int>* solve(int &ind, string &str){
+    
+    if(str.size() == 0 || ind >= str.size()){
+        return NULL;
+    }
+    
+    bool neg = false;
+    if(str[ind] == '-'){
+        neg = true;
+    }
+    
+    int num = 0;
+    while(ind < str.size() && isdigit(str[ind])){
+        num = 10*num + str[ind] - '0';
+        ind++;
+    }
+    
+    if(neg) num = -num;
+    
+    if(num == 0){
+        return NULL;
+    }
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(num);
+    
+    if(ind >= str.size()){
+        return root;
+    }
+    
+    if(ind < str.size() && str[ind] == '('){
+        ind++;
+        root -> left = solve(ind, str);
+    }
+    if(ind < str.size() && str[ind] == ')'){
+        ind++;
+    }
+    
+    if(ind < str.size() && str[ind] == '('){
+        ind++;
+        root -> right = solve(ind, str);
+    }
+    if(ind < str.size() && str[ind] == ')'){
+        ind++;
+    }
+    return root;
+}
+BinaryTreeNode<int>* treeFromBracket(string &str)
+{	
+    int ind = 0;
+    return solve(ind, str);
+}
