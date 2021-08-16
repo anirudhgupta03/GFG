@@ -109,3 +109,89 @@ int main()
  
     return 0;
 }
+
+//https://www.codingninjas.com/codestudio/problems/h_920474?leftPanelTab=0
+//Merge Two BSTs
+/*************************************************************
+    
+    Following is the Binary Tree node structure:
+
+    class TreeNode{
+
+        public :
+            int data;
+            TreeNode *left;
+            TreeNode *right;
+
+            TreeNode(int data) {
+                this -> data = data;
+                left = NULL;
+                right = NULL;
+            }
+
+            ~TreeNode() {
+            if (left){
+            delete left;
+            }
+
+            if (right){
+            delete right;
+            }
+        }   
+    };
+
+*************************************************************/
+#include<bits/stdc++.h>
+using namespace std;
+void traverse(TreeNode<int>* root, vector<int> &v){
+    
+    if(root == NULL){
+        return;
+    }
+    
+    traverse(root -> left, v);
+    v.push_back(root -> data);
+    traverse(root -> right, v);
+}
+TreeNode<int> *buildTree(int l, int r, vector<int> &v){
+    
+    if(l > r){
+        return NULL;
+    }
+    
+    int mid = (l + r)/2;
+    TreeNode<int> *root = new TreeNode<int>(v[mid]);
+    root -> left = buildTree(l, mid - 1, v);
+    root -> right = buildTree(mid + 1, r, v);
+    return root;
+}
+TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+    
+    vector<int> v1, v2;
+    traverse(root1, v1);
+    traverse(root2, v2);
+    
+    vector<int> v;
+    int p1 = 0, p2 = 0;
+    
+    while(p1 < v1.size() && p2 < v2.size()){
+        if(v1[p1] < v2[p2]){
+            v.push_back(v1[p1]);
+            p1++;
+        }
+        else{
+            v.push_back(v2[p2]);
+            p2++;
+        }
+    }
+    while(p1 < v1.size()){
+        v.push_back(v1[p1]);
+        p1++;
+    }
+    while(p2 < v2.size()){
+        v.push_back(v2[p2]);
+        p2++;
+    }
+    
+    return buildTree(0,v.size()-1,v);
+}
