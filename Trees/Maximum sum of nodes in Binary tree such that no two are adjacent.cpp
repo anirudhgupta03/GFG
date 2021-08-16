@@ -50,3 +50,61 @@ int main()
     cout << maxSum(root);
     return 0;
 }
+
+//https://www.codingninjas.com/codestudio/problems/maximum-sum-of-nodes-in-a-binary-tree-such-that-no-two-nodes-are-adjacent_1118112?leftPanelTab=1
+//Maximum Sum Of Nodes
+//Top-Down Approach
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> solve(TreeNode<int> *root, map<TreeNode<int>*, vector<int>> &mp){
+    
+    if(root == NULL){
+        vector<int> temp(2,0);
+        return temp;
+    }
+    
+    if(root -> left == NULL && root -> right == NULL){
+        vector<int> temp(2);
+        temp[0] = root -> data;
+        temp[1] = 0;
+        return temp;
+    }
+    
+    if(mp.find(root) != mp.end()){
+        return mp[root];
+    }
+    vector<int> l = solve(root -> left, mp);
+    vector<int> r = solve(root -> right, mp);
+    
+    vector<int> temp(2);
+    temp[0] = root -> data + l[1] + r[1];
+    temp[1] = max(l[0],l[1]) + max(r[0],r[1]);
+    
+    return mp[root] = temp;
+}
+int maximumSumOfNodes(TreeNode<int> *root)
+{
+    map<TreeNode<int>*, vector<int>> mp;
+	vector<int> v = solve(root, mp);
+    return max(v[0],v[1]);
+}
