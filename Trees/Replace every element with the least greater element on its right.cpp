@@ -76,3 +76,121 @@ int main()
  
     return 0;
 }
+
+//Least Greater Element
+//https://www.codingninjas.com/codestudio/problems/least-greater-element_1164266?leftPanelTab=0
+//Method - 1
+struct Node{
+  
+   int data;
+   Node* left, *right;
+    
+   Node(int val){
+       data = val;
+       left = NULL;
+       right = NULL;
+   } 
+};
+void insert(Node* root, int val){
+    
+    while(1){
+        if(root -> data > val){
+            if(root -> left){
+                root = root -> left;
+            }
+            else{
+                root -> left = new Node(val);
+                break;
+            }
+        }
+        else if(root -> data < val){
+            if(root -> right){
+                root = root -> right;
+            }
+            else{
+                root -> right = new Node(val);
+                break;
+            }
+        }
+        else{
+            break;
+        }
+    }
+}
+void search(Node* root, int value, int &val){
+    
+    while(root){
+        
+        if(root -> data > value){
+            val = root -> data;
+            root = root -> left;
+        }
+        else{
+            root = root -> right;
+        }
+    }
+}
+vector<int> leastGreaterElement(vector<int> &arr) 
+{	
+    int n = arr.size();
+	   Node* root = new Node(arr[n - 1]);
+    
+    vector<int> res(n);
+    res[n-1] = -1;
+    
+    for(int i = n - 2; i >= 0; i--){
+        int val = -1;
+        search(root, arr[i], val);
+        insert(root, arr[i]);
+        res[i] = val;
+    }
+    return res;
+}
+
+//Method - 2
+struct Node{
+  
+   int data;
+   Node* left, *right;
+    
+   Node(int val){
+       data = val;
+       left = NULL;
+       right = NULL;
+   } 
+};
+void insertInBST(Node* node, int data, int &val)
+{
+   while(1){
+      if(node -> data > data){
+        val = node -> data;
+        if(node -> left) node = node -> left;
+        else{
+          node -> left = new Node(data);
+          break;
+        }
+      }
+      else{
+        if(node -> right) node = node -> right;
+        else{
+          node -> right = new Node(data);
+          break;
+        }
+      }
+   }
+}
+vector<int> leastGreaterElement(vector<int> &arr) 
+{	
+    int n = arr.size();
+	Node* root = new Node(arr[n - 1]);
+    
+    vector<int> res(n);
+    res[n-1] = -1;
+    
+    for(int i = n - 2; i >= 0; i--){
+        int val = -1;
+        insertInBST(root, arr[i],val);
+        res[i] = val;
+    }
+    return res;
+}
