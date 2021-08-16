@@ -51,3 +51,55 @@ int main()
     print(head);
     return 0;
 }
+
+//https://www.codingninjas.com/codestudio/problems/flatten-bst-to-a-sorted-list_1169459?leftPanelTab=2
+//Flatten BST To A Sorted List
+/************************************************************
+
+    Following is the Binary Tree node structure
+    
+    template <typename T>
+    class TreeNode {
+        public :
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+
+        ~TreeNode() {
+            if(left)
+                delete left;
+            if(right)
+                delete right;
+        }
+    };
+
+************************************************************/
+void solve(TreeNode<int>* root, TreeNode<int>* &prev, TreeNode<int>* &head){
+    
+    if(root == NULL){
+        return;
+    }
+    
+    solve(root -> left, prev, head);
+    if(prev == NULL){
+        head = root;
+    }
+    else{
+        prev -> right = root;
+    }
+    prev = root;
+    prev -> left = NULL;
+    solve(root -> right, prev, head);
+}
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    TreeNode<int>* head, *prev = NULL;
+    solve(root, prev, head);
+    return head;
+}
