@@ -24,3 +24,46 @@ class Solution{
         }
     }
 };
+
+//Alter
+class Solution{
+public:
+    long long int maximizeSum(long long int a[], int n, int k)
+    {
+        long long sum = 0;
+        
+        sort(a, a + n);
+        
+        for(int i = 0; i < n; i++){
+            
+            if(a[i] < 0){
+                if(k != 0){
+                    sum -= a[i];
+                    k--;
+                }
+                else{
+                    sum += a[i];
+                }
+            }
+            else{
+                if(k != 0){
+                    if(k % 2 != 0){
+                        sum -= a[i];
+                    }
+                    else{
+                        sum += a[i];
+                    }
+                    k = 0;
+                }
+                else{
+                    sum += a[i];
+                }
+            }
+        }
+        
+        if(k % 2 != 0){
+            sum += 2*a[n-1];
+        }
+        return sum;
+    }
+};
