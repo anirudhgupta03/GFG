@@ -9,9 +9,9 @@ public:
         return count;
     }
     bool static cmp(pair<int,int> p1, pair<int,int> p2){
-        if(p1.second == p2.second){
-            return 0;
-        }
+//         if(p1.second == p2.second){
+//             return 0;
+//         }
         return p1.second > p2.second;
     }
     void sortBySetBitCount(int arr[], int n)
