@@ -1,3 +1,4 @@
+//https://www.codingninjas.com/codestudio/problems/shuffle-two-strings_1115692?leftPanelTab=0
 //Method - 1
 //TLE
 bool solve(string a, string b, string c, int n1, int n2, int n3){
