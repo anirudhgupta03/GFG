@@ -1,7 +1,7 @@
 # GFG Notes
 
 Q - Longest Prefix Suffix<br/>
-https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1
+https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1<br/>
 Algo - KMP
 Prefix Function 
 
