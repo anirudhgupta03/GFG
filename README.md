@@ -2,7 +2,7 @@
 
 Q - Longest Prefix Suffix<br/>
 https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1<br/>
-
+Ref: https://www.youtube.com/watch?v=lhhqbGH7Pao<br/>
 Algo - KMP
 
 Prefix Function<br/> 
