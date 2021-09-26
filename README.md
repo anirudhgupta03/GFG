@@ -1,6 +1,6 @@
 # GFG Notes
 
-#Q - Longest Prefix Suffix<br/>
+# Q - Longest Prefix Suffix<br/>
 https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1<br/>
 Ref: https://www.youtube.com/watch?v=lhhqbGH7Pao<br/>
 
@@ -13,7 +13,7 @@ By definition, prefix[0] = 0.
 prefix[i] = maximum k such that 
 s[0...k-1] = s[i-(k-1)...i]
 
-#Q - Smallest window in a string containing all the characters of another string<br/>
+# Q - Smallest window in a string containing all the characters of another string<br/>
 https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1#<br/>
 
 Algo - Sliding Window
