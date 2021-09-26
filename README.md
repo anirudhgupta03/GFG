@@ -20,7 +20,7 @@ Algo - Sliding Window
 
 Instead of using unordered_map we can use array if the range of key is finite like in this case range of key is [0,255]
 
-#Q - Count Customers Who Did Not Get A Computer<br/>
+# Q - Count Customers Who Did Not Get A Computer<br/>
 https://www.codingninjas.com/codestudio/problems/count-customers-who-did-not-get-a-computer_1115775?leftPanelTab=0<br/>
 
 Instead of using unordered_map we can use array if the range of key is finite like in this case range of key is [1,n]
