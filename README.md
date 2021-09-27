@@ -30,3 +30,4 @@ https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1#<br/>
 Ref: https://www.youtube.com/watch?v=KYH83T4q6Vs
 
 # Quick Sort
+![alt text](https://github.com/anirudhkgupta222/GFG/blob/main/Screenshot%202021-09-27%20202523.jpg?raw=true)
