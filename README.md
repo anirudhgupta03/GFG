@@ -24,3 +24,9 @@ Instead of using unordered_map we can use array if the range of key is finite li
 https://www.codingninjas.com/codestudio/problems/count-customers-who-did-not-get-a-computer_1115775?leftPanelTab=0<br/>
 
 Instead of using unordered_map we can use array if the range of key is finite like in this case range of key is [1,n]
+
+# Q - Reverse a linked list using Recursion<br/>
+https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1#<br/>
+Ref: https://www.youtube.com/watch?v=KYH83T4q6Vs
+
+
