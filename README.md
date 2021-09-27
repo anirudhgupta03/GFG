@@ -32,11 +32,11 @@ Ref: https://www.youtube.com/watch?v=KYH83T4q6Vs
 # Quick Sort
 ![alt text](https://github.com/anirudhkgupta222/GFG/blob/main/Screenshot%202021-09-27%20202523.jpg?raw=true)
 
-Best Case
-If we always get the pivot element at the center.
+Best Case<br/>
+If we always get the pivot element at the center.<br/>
 TC - O(NlogN)
 ![alt text](https://github.com/anirudhkgupta222/GFG/blob/main/Screenshot%202021-09-27%20203800.jpg?raw=true)
 TC - O(NlogN)
-Worst Case
-If the array is sorted already.
+Worst Case<br/>
+If the array is sorted already.<br/>
 TC - O(N^2)
