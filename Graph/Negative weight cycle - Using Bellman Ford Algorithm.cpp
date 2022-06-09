@@ -1,3 +1,4 @@
+//Method - 1
 class Solution{
 public:
 	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
@@ -8,26 +9,32 @@ public:
 	    
 	    int e = edges.size();
 	    bool update;
-	    int x;
-	    for(int i = 0; i < n; i++)
-	    {	       
-	        x = -1;
+	    for(int i = 0; i < n - 1; i++)
+	    {
+	        update = false;
 	        for(int j = 0; j < e; j++)
 	        {
 	            if(dist[edges[j][0]] < INT_MAX && dist[edges[j][0]] + edges[j][2] < dist[edges[j][1]]){
-	                x = edges[j][1];
+	                update = true;
 	                dist[edges[j][1]] = dist[edges[j][0]] + edges[j][2];
 	            }
 	        }
+	        if(!update){
+	            break;
+	        }
 	    }
 	    
-	    if(x == -1){
-	        return 0;
-	    }
-	    return 1;
+	    for(int j=0; j<e and update==true; ++j)
+		{
+			if(dist[edges[j][0]] < INT_MAX && dist[edges[j][0]] + edges[j][2] < dist[edges[j][1]]){
+	                return true;
+	       }
+		}
+		return false;
 	}
 };
 
+//Method - 2
 class Solution{
 public:
 	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
