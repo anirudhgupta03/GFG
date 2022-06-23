@@ -32,7 +32,7 @@ class Solution
             bool flag = false;
             for(int j = arr[i].dead; j >= 1; j--){
                 if(v[j] == -1){
-                    v[j] = arr[i].profit;
+                    v[j] = arr[i].id;
                     maxProfit += v[j];
                     count++;
                     break;
