@@ -4,39 +4,33 @@ struct Item{
     int weight;
 };
 */
-
-
 class Solution
 {
     public:
     //Function to get the maximum total value in the knapsack.
     #define ppd pair<pair<int,int>,double>
-    bool static cmp(ppd &p1, ppd &p2){
-        return p1.second > p2.second;
+    bool static cmp(Item item1, Item item2){
+        
+        double valPerWt1 = (double)item1.value/item1.weight;
+        double valPerWt2 = (double)item2.value/item2.weight;
+        return valPerWt1 > valPerWt2;
     }
     double fractionalKnapsack(int W, Item arr[], int n)
     {
-        vector<ppd> v(n);
-        
-        for(int i = 0; i < n; i++){
-            v[i] = {{arr[i].value, arr[i].weight},(1.0*(arr[i].value)/arr[i].weight)};
-        }
-        
-        sort(v.begin(), v.end(), cmp);
+        sort(arr, arr + n, cmp);
         
         double maxValue = 0;
         
         for(int i = 0; i < n; i++){
-            if(W >= v[i].first.second){
-                maxValue += v[i].first.first;
-                W -= v[i].first.second;
+            if(W >= arr[i].weight){
+                maxValue += arr[i].value;
+                W -= arr[i].weight;
             }
             else{
-                maxValue += W*v[i].second;
+                maxValue += W*((double)arr[i].value/arr[i].weight);
                 break;
             }
         }
         return maxValue;
-    }
-        
+    } 
 };
