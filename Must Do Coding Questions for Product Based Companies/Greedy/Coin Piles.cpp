@@ -14,6 +14,11 @@ class Solution {
         
         for(int i = 0; i < N; i++){
             
+            if(i != 0 && A[i] == A[i - 1]){
+                coins += A[i];
+                continue;
+            }
+            
             int lo = i + 1, hi = N - 1, ele = A[i] + K, ind = N;
             
             while(lo <= hi){
@@ -32,4 +37,4 @@ class Solution {
         }
         return ans;
     }
-};
+}
