@@ -24,7 +24,7 @@ public:
 
 //Top-Down Approach
 //Time Complexity - O(N^3)
-//Space Complexity - O(N^2)
+//Space Complexity - O(N^2) + O(N)(Auxiliary Stack Space)
 class Solution{
 public:
     
@@ -58,5 +58,25 @@ public:
             }
         }
         return solve(arr,1,N-1,dp);
+    }
+};
+
+//Bottom-Up
+class Solution{
+public:
+    int matrixMultiplication(int N, int arr[])
+    {
+        int dp[N][N];
+        memset(dp,0,sizeof(dp));
+        for(int l = N - 1; l >= 1; l--){
+            for(int r = l + 1; r <= N - 1; r++){
+                int minProd = INT_MAX;
+                for(int j = l; j <= r - 1; j++){
+                    minProd = min(minProd, dp[l][j] + dp[j + 1][r] + arr[l - 1]*arr[j]*arr[r]);
+                }
+                dp[l][r] = minProd;
+            }
+        }
+        return dp[1][N - 1];
     }
 };
