@@ -62,6 +62,8 @@ public:
 };
 
 //Bottom-Up
+//TC: O(N*N)
+//SC: O(N*N)
 class Solution{
 public:
     int matrixMultiplication(int N, int arr[])
