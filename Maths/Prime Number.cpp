@@ -1,3 +1,4 @@
+//Ref: https://www.youtube.com/watch?v=MJcckSfoYdI
 class Solution {
   public:
     bool isPrime(int n) {
