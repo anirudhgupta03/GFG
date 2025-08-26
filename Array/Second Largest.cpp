@@ -5,13 +5,13 @@ class Solution {
         // code here
         int largestEle = -1, secondLargestEle = -1;
         
-        for(int i: arr){
-            if(i > largestEle){
+        for(int ele: arr){
+            if(ele > largestEle){
                 secondLargestEle = largestEle;
-                largestEle = i;
+                largestEle = ele;
             }
-            else if(i > secondLargestEle && i != largestEle){
-                secondLargestEle = i;
+            else if(ele > secondLargestEle && ele != largestEle){
+                secondLargestEle = ele;
             }
         }
         return secondLargestEle;
