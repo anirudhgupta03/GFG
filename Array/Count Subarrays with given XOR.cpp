@@ -1,3 +1,4 @@
+//Ref: https://www.youtube.com/watch?v=eZr-6p0B7ME&list=PLgUwDviBIf0rENwdL0nEH0uGom9no0nyB&index=22
 class Solution {
   public:
     long subarrayXor(vector<int> &arr, int k) {
