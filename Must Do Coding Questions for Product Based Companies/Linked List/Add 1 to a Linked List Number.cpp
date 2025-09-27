@@ -37,6 +37,7 @@ class Solution {
             int sum = ptr -> data + carry;
             ptr -> data = sum % 10;
             carry = sum/10;
+            if(carry == 0) break;
             pre = ptr;
             ptr = ptr -> next;
         }
