@@ -1,18 +1,4 @@
-/*
-
-struct Node
-{
-    int data;
-    struct Node* next;
-
-    Node(int x){
-        data = x;
-        next = NULL;
-    }
-};
-
-*/
-
+//Method - 1 (Iterative)
 class Solution {
   public:
     Node* reverseLL(Node* head){
@@ -43,5 +29,30 @@ class Solution {
         }
         if(carry) pre -> next = new Node(carry);
         return reverseLL(head);
+    }
+};
+
+//Method - 2 (Recursive)
+class Solution {
+  public:
+    int solve(Node* head){
+        if(head == NULL){
+            return 1;
+        }
+        int carry = solve(head -> next);
+        if(carry == 0) return 0;
+        int sum = carry + head -> data;
+        head -> data = sum % 10;
+        return sum/10;
+    }
+    Node* addOne(Node* head) {
+        // Your Code here
+        int carry = solve(head);
+        if(carry){
+            Node* root = new Node(carry);
+            root -> next = head;
+            head = root;
+        }
+        return head;
     }
 };
