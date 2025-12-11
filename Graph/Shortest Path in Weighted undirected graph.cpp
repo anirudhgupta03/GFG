@@ -1,3 +1,4 @@
+//Method - 1
 #define pii pair<int,int>
 struct cmp{
     bool operator()(pii &p1, pii &p2){
@@ -46,5 +47,62 @@ class Solution {
         path.push_back(dist[n]);
         reverse(path.begin(), path.end());
         return path;
+    }
+};
+//Method - 2
+#define ppv pair<pair<int,int>, vector<int>>
+struct cmp{
+    bool operator()(ppv &p1, ppv &p2){
+        return p1.first.second > p2.first.second;
+    }
+};
+class Solution {
+  public:
+    vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
+        // Code here
+        vector<pair<int,int>> adj[n + 1];
+        
+        for(auto &edge: edges){
+            int u = edge[0], v = edge[1], w = edge[2];
+            adj[u].push_back({v, w});
+            adj[v].push_back({u, w});
+        }
+        
+        priority_queue<ppv, vector<ppv>, cmp> pq;
+        
+        vector<int> dist(n + 1, INT_MAX);
+        
+        pq.push({{1, 0},{1}});
+        
+        vector<int> vis(n + 1, 0);
+        
+        while(!pq.empty()){
+            int curr = pq.top().first.first;
+            int wt = pq.top().first.second;
+            
+            vector<int> path = pq.top().second;
+            
+            pq.pop();
+            
+            if(curr == n){
+                path.insert(path.begin(), wt);
+                return path;
+            }
+            
+            if(vis[curr] == 1){
+                continue;
+            }
+            vis[curr] = 1;
+            
+            for(auto &adjNode: adj[curr]){
+                if(wt + adjNode.second < dist[adjNode.first]){
+                    dist[adjNode.first] = wt + adjNode.second;
+                    path.push_back(adjNode.first);
+                    pq.push({{adjNode.first, dist[adjNode.first]},path});
+                    path.pop_back();
+                }
+            }
+        }
+        return {-1};
     }
 };
