@@ -74,12 +74,13 @@ class Solution {
             if(parU != parV){
                 mstWeight += w;
                 if(size[parU] >= size[parV]){
+                    size[parU] += size[parV];
                     merge(parU, parV, par);
                 }
                 else{
+                    size[parV] += size[parU];
                     merge(parV, parU, par);
                 }
-                size[parU] += size[parV];
             }
         }
         return mstWeight;
