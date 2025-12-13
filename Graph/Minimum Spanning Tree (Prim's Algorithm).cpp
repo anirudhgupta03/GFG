@@ -25,7 +25,7 @@ class Solution {
             mstWt += wt;
             
             for(auto &[nbr, w]: adj[node]){
-                if(w <= dist[nbr]){
+                if(vis[nbr] == 0 && w <= dist[nbr]){
                     dist[nbr] = w;
                     pq.push({w, nbr});
                 }
