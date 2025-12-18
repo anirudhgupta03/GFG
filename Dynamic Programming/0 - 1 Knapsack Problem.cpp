@@ -60,6 +60,7 @@ class Solution
 };
 
 //Bottom-Up Approach
+//Tabulation
 //Time Complexity - O(n*W)
 //Space Complexity - O(n*W)
 class Solution
@@ -85,5 +86,36 @@ class Solution
            }
        }
        return dp[n][W];
+    }
+};
+
+
+//Bottom-Up Approach
+//Tabulation + Space Optimization
+//Time Complexity - O(n*W)
+//Space Complexity - O(W)
+class Solution {
+  public:
+    int knapsack(int W, vector<int> &val, vector<int> &wt) {
+        // code here
+        int n = val.size();
+        vector<int> dp(W + 1, 0);
+        
+        for(int i = 0; i <= n; i++){
+            vector<int> currdp(W + 1, 0);
+            for(int j = 0; j <= W; j++){
+                if(i == 0 || j == 0){
+                    currdp[j] = 0;
+                }
+                else{
+                    currdp[j] = dp[j];
+                    if(wt[i - 1] <= j){
+                        currdp[j] = max(currdp[j], dp[j - wt[i - 1]] + val[i - 1]);
+                    }
+                }
+            }
+            dp = currdp;
+        }
+        return dp[W];
     }
 };
