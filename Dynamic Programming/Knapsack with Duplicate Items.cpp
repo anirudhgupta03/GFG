@@ -74,6 +74,7 @@ class Solution {
 };
 
 //Tabulation + Space Optimization
+//2 DP arrays
 //Time Complexity - O(N*W)
 //Space Complexity - O(W)
 class Solution {
@@ -100,5 +101,35 @@ class Solution {
             prevDP = currDP;
         }
         return prevDP[capacity];
+    }
+};
+
+//Tabulation + Space Optimization
+//1 DP array
+//Time Complexity - O(N*W)
+//Space Complexity - O(W)
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n = val.size();
+        vector<int> dp(capacity + 1, 0);
+        
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j <= capacity; j++){
+                if(i == 0 || j == 0){
+                    dp[j] = 0;
+                }
+                else{
+                    int take = INT_MIN;
+                    if(wt[i - 1] <= j){
+                        take = dp[j - wt[i - 1]] + val[i - 1];
+                    }
+                    int notTake = dp[j];
+                    dp[j] = max(take, notTake);
+                }
+            }
+        }
+        return dp[capacity];
     }
 };
