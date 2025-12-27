@@ -1,7 +1,6 @@
-
 //Recursive Approach
-//Time Complexity - O(2^N)
-//Space Complexity - O(1)
+//Time Complexity - O(exponential)
+//Space Complexity - O(N)
 class Solution{
   public:
     int solve(int n1, int n2, int price[], int len[]){
@@ -81,7 +80,6 @@ class Solution{
         
         for(int i = 0; i < n + 1; i++){
             for(int j = 0; j < n + 1; j++){
-                
                 if(i == 0 || j == 0){
                     dp[i][j] = 0;
                 }
