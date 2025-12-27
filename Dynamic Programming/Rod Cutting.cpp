@@ -94,3 +94,74 @@ class Solution{
         return dp[n][n];
     }
 };
+
+//Bottom-Up Approach
+//Tabulation + Space Optimization
+//Time Complexity - O(N*N)
+//Space Complexity - O(N)
+//2 DP Arrays
+class Solution {
+  public:
+    int cutRod(vector<int> &price) {
+        // code here
+        int len = price.size();
+        
+        vector<int> rodLen(len);
+        
+        for(int i = 0; i < len; i++){
+            rodLen[i] = i + 1;
+        }
+  
+        vector<int> prevDP(len + 1, 0);
+        for(int i = 0; i <= len; i++){
+            vector<int> currDP(len + 1, 0);
+            for(int j = 0; j <= len; j++){
+                if(i == 0 || j == 0){
+                    currDP[j] = 0;
+                }
+                else{
+                    currDP[j] = prevDP[j];
+                    if(rodLen[i - 1] <= j){
+                        currDP[j] = max(currDP[j], currDP[j - rodLen[i - 1]] + price[i - 1]);
+                    }
+                }
+            }
+            prevDP = currDP;
+        }
+        return prevDP[len];
+    }
+};
+
+//Bottom-Up Approach
+//Tabulation + Space Optimization
+//Time Complexity - O(N*N)
+//Space Complexity - O(N)
+//1 DP Array
+class Solution {
+  public:
+    int cutRod(vector<int> &price) {
+        // code here
+        int len = price.size();
+        
+        vector<int> rodLen(len);
+        
+        for(int i = 0; i < len; i++){
+            rodLen[i] = i + 1;
+        }
+        
+        vector<int> dp(len + 1, 0);
+        for(int i = 0; i <= len; i++){
+            for(int j = 0; j <= len; j++){
+                if(i == 0 || j == 0){
+                    dp[j] = 0;
+                }
+                else{
+                    if(rodLen[i - 1] <= j){
+                        dp[j] = max(dp[j], dp[j - rodLen[i - 1]] + price[i - 1]);
+                    }
+                }
+            }
+        }
+        return dp[len];
+    }
+};
