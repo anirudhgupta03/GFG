@@ -21,62 +21,84 @@ public:
 //Top-Down Approach
 //Time Complexity - O(N*W)
 //Space Complexity - O(N*W)
-class Solution{
-public:
-    int solve(int N, int W, int val[], int wt[], vector<vector<int>> &dp){
-        
-        if(N == 0 || W == 0){
-            return dp[N][W] = 0;
+class Solution {
+  public:
+    int solve(int ind, vector<int>& val, vector<int>& wt, int capacity, vector<vector<int>>& dp){
+        if(ind == -1 || capacity == 0){
+            return 0;    
         }
-        
-        if(dp[N][W] != -1){
-            return dp[N][W];
+        if(dp[ind][capacity] != -1){
+            return dp[ind][capacity];
         }
-        
-        if(wt[N-1] <= W){
-            return dp[N][W] = max(val[N-1] + solve(N,W - wt[N-1],val,wt,dp), solve(N-1,W,val,wt,dp));
+        int take = INT_MIN;
+        if(wt[ind] <= capacity){
+            take = solve(ind, val, wt, capacity - wt[ind], dp) + val[ind];
         }
-        else{
-            return dp[N][W] = solve(N-1,W,val,wt,dp);
-        }
+        int notTake = solve(ind - 1, val, wt, capacity, dp);
+        return dp[ind][capacity] = max(take, notTake);
     }
-    int knapSack(int N, int W, int val[], int wt[])
-    {
-        vector<vector<int>> dp(N+1,vector<int>(W+1,-1));
-        
-        return solve(N,W,val,wt,dp);
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n = val.size();
+        vector<vector<int>> dp(n, vector<int>(capacity + 1, -1));
+        return solve(n - 1, val, wt, capacity, dp);
     }
 };
 
 //Bottom-Up Approach
 //Time Complexity - O(N*W)
 //Space Complexity - O(N*W)
-class Solution{
-public:
-    int knapSack(int N, int W, int val[], int wt[])
-    {
-        int dp[N+1][W+1];
-        
-        for(int i = 0; i < N + 1; i++){
-            for(int j = 0; j < W + 1; j++){
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n = val.size();
+        vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j <= capacity; j++){
                 if(i == 0 || j == 0){
                     dp[i][j] = 0;
                 }
+                else{
+                    int take = INT_MIN;
+                    if(wt[i - 1] <= j){
+                        take = dp[i][j - wt[i - 1]] + val[i - 1];
+                    }
+                    int notTake = dp[i - 1][j];
+                    dp[i][j] = max(take, notTake);
+                }
             }
         }
-        
-        for(int i = 1; i < N + 1; i++){
-            for(int j = 1; j < W + 1; j++){
-                
-                if(wt[i-1] <= j){
-                    dp[i][j] = max(val[i-1] + dp[i][j-wt[i-1]],dp[i-1][j]);
+        return dp[n][capacity];
+    }
+};
+
+//Tabulation + Space Optimization
+//Time Complexity - O(N*W)
+//Space Complexity - O(W)
+class Solution {
+  public:
+    int knapSack(vector<int>& val, vector<int>& wt, int capacity) {
+        // code here
+        int n = val.size();
+        vector<int> prevDP(capacity + 1, 0);
+        for(int i = 0; i <= n; i++){
+            vector<int> currDP(capacity + 1, 0);
+            for(int j = 0; j <= capacity; j++){
+                if(i == 0 || j == 0){
+                    currDP[j] = 0;
                 }
                 else{
-                    dp[i][j] = dp[i-1][j];
+                    int take = INT_MIN;
+                    if(wt[i - 1] <= j){
+                        take = currDP[j - wt[i - 1]] + val[i - 1];
+                    }
+                    int notTake = prevDP[j];
+                    currDP[j] = max(take, notTake);
                 }
             }
+            prevDP = currDP;
         }
-        
-        return dp[N][W];
+        return prevDP[capacity];
     }
 };
