@@ -23,7 +23,8 @@ class Solution {
         if(root -> left == NULL && root -> right == NULL) return {root -> data};
         
         res.push_back(root -> data);
-        
+
+        //Left Boundary excluding Leaf Nodes
         Node* temp = root -> left;
         while(temp){
             if(temp -> left || temp -> right){
@@ -32,7 +33,8 @@ class Solution {
             if(temp -> left == NULL) temp = temp -> right;
             else temp = temp -> left;
         }
-        
+
+        //Leaf Nodes
         stack<Node*> st;
         st.push(root);
         while(!st.empty()){
@@ -44,7 +46,8 @@ class Solution {
             if(curr -> right) st.push(curr -> right);
             if(curr -> left) st.push(curr -> left);
         }
-        
+
+        //Reverse Right Boundary exculding Leaf Nodes
         temp = root -> right;
         while(temp){
             if(temp -> left || temp -> right){
